@@ -1,0 +1,1 @@
+export type ElmentJSX = JSX.Element | JSX.Element[]
