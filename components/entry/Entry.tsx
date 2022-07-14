@@ -1,4 +1,5 @@
 import { Entry } from "../../interfaces"
+import { useEntryStore } from "../../store"
 
 interface Props {
     entry: Entry
@@ -13,12 +14,33 @@ const opts: Intl.DateTimeFormatOptions = {
 }
 
 export const EntryCard = ({ entry }: Props) => {
+
+    const setIsDragging = useEntryStore(state => state.setIsDragging)
+    const isDragging = useEntryStore(state => state.isDragging)
+    const deleteEntry = useEntryStore(state => state.deleteEntry)
+
+    const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
+        e.dataTransfer.setData('text', entry._id)
+        setIsDragging(true)
+    }
+
+    const handleDragEnd = () => setIsDragging(false)
+
+    const handleDelete = () => deleteEntry(entry._id)
+
     return (
-        <div className="bg-black rounded my-4 p-4">
+        <div
+            className={`fadeInUp transition-all ease-linear border-2 bg-black rounded my-4 p-4 cursor-pointer ${isDragging ? 'opacity-25' : 'opacity-100'} ${(entry.status == 'pending') ? 'border-secondary' : (entry.status == 'completed') ? 'border-info' : 'border-accent'}`}
+            draggable
+            onDragStart={handleDragStart}
+            onDragEnd={handleDragEnd}
+        >
             <pre className="font-bold min-h-12">{entry.content}</pre>
-            <div className="flex justify-end mt-2">
-                <span className="text-sm font-semibold text-white/50">{new Intl.DateTimeFormat('en', opts).format(entry.date)}</span>
+            <div className="flex justify-between items-center mt-2">
+                <button className="btn btn-sm" onClick={handleDelete}>Delete</button>
+                <span className="select-none text-sm font-semibold text-white/50">{new Intl.DateTimeFormat('en', opts).format(entry.date)}</span>
             </div>
+
         </div>
     )
 }
