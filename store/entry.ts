@@ -14,8 +14,11 @@ interface EntryStoreState {
 export const useEntryStore = create<EntryStoreState>((set, get) => ({
   listEntries: [],
   isDragging: false,
+
   setIsDragging: (isDragging: boolean) => set(state => ({ ...state, isDragging })),
+
   deleteEntry: (id: string) => set(state => ({ ...state, listEntries: [...state.listEntries.filter(entry => entry._id !== id)] })),
+
   updateEntry: (id: string, status: Status) => set(state => {
     const entries = get().listEntries;
     const newEntryUpdated = entries.filter(entry => entry._id === id)[0];
@@ -23,9 +26,10 @@ export const useEntryStore = create<EntryStoreState>((set, get) => ({
 
     return {
       ...state,
-      listEntries: [...entries.filter(entry => entry._id !== id), newEntryUpdated]
+      listEntries: [newEntryUpdated, ...entries.filter(entry => entry._id !== id)]
     }
   }),
+
   addEntry: (content: string) => set(state => {
     const newEntry: Entry = {
       content,

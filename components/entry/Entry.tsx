@@ -14,7 +14,7 @@ const opts: Intl.DateTimeFormatOptions = {
 }
 
 export const EntryCard = ({ entry }: Props) => {
-
+    // TODO: too much logic for this component?
     const setIsDragging = useEntryStore(state => state.setIsDragging)
     const isDragging = useEntryStore(state => state.isDragging)
     const deleteEntry = useEntryStore(state => state.deleteEntry)

@@ -5,6 +5,7 @@ interface Props {
 }
 
 export const SideBar = ({ children }: Props) => {
+    // TODO: update links
     return (
         <div className="drawer">
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />

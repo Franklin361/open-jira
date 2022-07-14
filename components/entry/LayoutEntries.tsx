@@ -9,6 +9,8 @@ interface Props {
 
 export const LayoutEntries = ({ status }: Props) => {
 
+    // TODO: too much logic for this component?
+
     const listEntries = useEntryStore(state => state.listEntries)
     const updateEntry = useEntryStore(state => state.updateEntry)
     const setIsDragging = useEntryStore(state => state.setIsDragging)
