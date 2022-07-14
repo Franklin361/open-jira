@@ -1,17 +1,17 @@
 import type { NextPage } from "next";
-import { MainLayout } from "../components";
+import { ColumnGrid, Form, MainLayout } from "../components";
+
 
 const Home: NextPage = () => {
   return (
     <MainLayout>
       <main className="flex gap-5 p-5 h-[85vh]">
-        <div className="flex-1 border border-neutral-content/50 p-2 rounded-lg overflow-y-scroll">Item</div>
-        <div className="flex-1 border border-neutral-content/50 p-2 rounded-lg overflow-y-scroll">Item</div>
-        <div className="flex-1 border border-neutral-content/50 p-2 rounded-lg overflow-y-scroll">Item</div>
+        <ColumnGrid status="pending" children={<Form />} />
+        <ColumnGrid status="progress" />
+        <ColumnGrid status="completed" />
       </main>
     </MainLayout>
   )
 };
 
 export default Home;
-
