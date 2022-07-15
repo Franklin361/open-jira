@@ -2,7 +2,7 @@ import { useMemo } from "react"
 import { EntryCard, NoEntries, Loading } from "../"
 import { useEntryStore } from "../../store"
 import { Status } from "../../interfaces"
-import { updatePost } from "../../utils"
+import { refreshEntries, updatePost } from "../../utils"
 
 interface Props {
     status: Status
@@ -15,19 +15,22 @@ export const LayoutEntries = ({ status }: Props) => {
     const listEntries = useEntryStore(state => state.listEntries)
     const updateEntry = useEntryStore(state => state.updateEntry)
     const setIsDragging = useEntryStore(state => state.setIsDragging)
+    const setEntries = useEntryStore(state => state.setEntries)
 
     const entries = useMemo(() => listEntries ? listEntries.filter(entry => entry.status === status) : [], [listEntries])
 
     const handleDrop = async (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault()
         const id = e.dataTransfer.getData('text')
-        // TODO: add loading
-        const entryUpdated = await updatePost({ id, status })
-        if (entryUpdated) {
-            // TODO: update state before save in the DB 
-            updateEntry(entryUpdated)
-            setIsDragging(false)
+        let entry = listEntries?.find(list => list._id === id)
+
+        if (entry) {
+            entry.status = status
+            updateEntry(entry)
         }
+        setIsDragging(false)
+        const entryUpdated = await updatePost({ id, status })
+        if (entryUpdated === null) refreshEntries(setEntries)
     }
 
     const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => e.preventDefault()
