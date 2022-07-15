@@ -1,7 +1,12 @@
 import { entriesApi } from "../apis";
 import { Entry } from "../interfaces";
 
-export const refreshEntries = async (callback: (entries: Entry[]) => void) => {
-    const { data } = await entriesApi.get<Entry[]>('/entries');
-    callback(data)
+export const refreshEntries = async (callback: (entries: Entry[] | null) => void) => {
+    try {
+        const { data } = await entriesApi.get<Entry[]>('/entries');
+        callback(data)
+    } catch (error) {
+        console.log(error)
+        callback(null)
+    }
 }

@@ -23,7 +23,7 @@ export const Form = () => {
                                 disabled={value.length <= 0}
                             >Add Entry</button>
 
-                            <button onClick={events.handleHiddeForm} type="button" className="btn btn-ghost btn-sm">Cancel</button>
+                            <button onClick={events.handleHideForm} type="button" className="btn btn-ghost btn-sm">Cancel</button>
                         </div>
                     </>
                     : <button

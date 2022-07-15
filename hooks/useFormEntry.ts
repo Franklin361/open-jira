@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { useEntryStore } from "../store"
+import { createPost } from "../utils"
 
 export const useFormEntry = () => {
 
@@ -12,14 +13,19 @@ export const useFormEntry = () => {
 
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => setForm(e.target.value)
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        addEntry(form)
-        handleHiddeForm()
+        // TODO: add loading while it's creating the entry
+        const entry = await createPost({ content: form })
+
+        if (entry) {
+            addEntry(entry)
+            handleHideForm()
+        }
     }
 
     const handleShowForm = () => setShowForm(true)
-    const handleHiddeForm = () => {
+    const handleHideForm = () => {
         setForm('');
         setShowForm(false);
     }
@@ -35,6 +41,6 @@ export const useFormEntry = () => {
         handleChange,
         handleSubmit,
         handleShowForm,
-        handleHiddeForm
+        handleHideForm
     }
 }

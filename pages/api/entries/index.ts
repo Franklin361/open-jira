@@ -4,8 +4,6 @@ import { Entry, IEntry } from '../../../models'
 
 type Data = { msg: string } | IEntry[] | IEntry
 
-const isProduction = process.env.NODE_ENV === 'production'
-
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
 
     switch (req.method) {
@@ -21,7 +19,7 @@ export const listEntries = async (res: NextApiResponse<Data>) => {
 
     await database.connect();
 
-    const entries = await Entry.find().sort({ date: 'ascending' });
+    const entries = await Entry.find().sort({ date: 'descending' });
 
     await database.disconnect();
 
