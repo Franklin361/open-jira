@@ -32,7 +32,7 @@ export const LayoutEntries = ({ status }: Props) => {
 
     const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => e.preventDefault()
 
-    if (listEntries === null) return <Loading status={status} />
+    if (listEntries === null) return <Loading className="after:bg-[#272935]" status={status} />
 
     return (
         <div
