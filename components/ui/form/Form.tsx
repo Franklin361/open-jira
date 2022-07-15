@@ -1,8 +1,9 @@
-import { useFormEntry } from "../../hooks"
+import { useFormEntry } from "../../../hooks"
+import { ButtonsForm } from "./"
 
 export const Form = () => {
 
-    const { inputRef, showForm, value, ...events } = useFormEntry()
+    const { inputRef, showForm, value, loading, ...events } = useFormEntry()
 
     return (
         <form className="mt-2" onSubmit={events.handleSubmit}>
@@ -15,23 +16,18 @@ export const Form = () => {
                             value={value}
                             ref={inputRef}
                             placeholder='To do ...'
+                            disabled={loading}
                         />
-                        <div className="flex justify-between mt-2">
-                            <button
-                                type="submit"
-                                className="btn btn-primary btn-sm"
-                                disabled={value.length <= 0}
-                            >Add Entry</button>
-
-                            <button onClick={events.handleHideForm} type="button" className="btn btn-ghost btn-sm">Cancel</button>
-                        </div>
+                        <ButtonsForm handleHideForm={events.handleHideForm} loading={loading} value={value} />
                     </>
                     : <button
                         type="button"
                         className="btn btn-block btn-secondary btn-sm"
                         onClick={events.handleShowForm}
+                        disabled={loading}
                     > Create entry</button>
             }
         </form>
     )
 }
+

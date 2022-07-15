@@ -8,6 +8,7 @@ export const useFormEntry = () => {
 
     const [form, setForm] = useState('')
     const [showForm, setShowForm] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const inputRef = useRef<HTMLTextAreaElement>(null)
 
@@ -15,13 +16,13 @@ export const useFormEntry = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        // TODO: add loading while it's creating the entry
+        setLoading(true)
         const entry = await createPost({ content: form })
-
         if (entry) {
             addEntry(entry)
             handleHideForm()
         }
+        setLoading(false)
     }
 
     const handleShowForm = () => setShowForm(true)
@@ -38,6 +39,7 @@ export const useFormEntry = () => {
         value: form,
         inputRef,
         showForm,
+        loading,
         handleChange,
         handleSubmit,
         handleShowForm,
