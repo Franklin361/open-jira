@@ -24,6 +24,7 @@ export const LayoutEntries = ({ status }: Props) => {
         // TODO: add loading
         const entryUpdated = await updatePost({ id, status })
         if (entryUpdated) {
+            // TODO: update state before save in the DB 
             updateEntry(entryUpdated)
             setIsDragging(false)
         }
