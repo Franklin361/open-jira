@@ -4,7 +4,7 @@ import { v4 as uuid } from 'uuid';
 
 interface EntryStoreState {
   listEntries: Entry[] | null,
-  setEntries: (entries: Entry[]) => void,
+  setEntries: (entries: Entry[] | null) => void,
   addEntry: (entry: Entry) => void,
   isDragging: boolean
   setIsDragging: (isDragging: boolean) => void
@@ -18,7 +18,7 @@ export const useEntryStore = create<EntryStoreState>((set, get) => ({
 
   setIsDragging: (isDragging: boolean) => set(state => ({ ...state, isDragging })),
 
-  setEntries: (entries: Entry[] = []) => set(state => ({ ...state, listEntries: [...entries] })),
+  setEntries: (entries: Entry[] | null = []) => set(state => ({ ...state, listEntries: entries })),
 
   deleteEntry: (id: string) => set(state => ({ ...state, listEntries: [...state.listEntries!.filter(entry => entry._id !== id)] })),
 
