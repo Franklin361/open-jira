@@ -1,5 +1,6 @@
 import { Entry } from "../../interfaces"
 import { useEntryStore } from "../../store"
+import { deletePost } from "../../utils"
 
 interface Props {
     entry: Entry
@@ -26,7 +27,11 @@ export const EntryCard = ({ entry }: Props) => {
 
     const handleDragEnd = () => setIsDragging(false)
 
-    const handleDelete = () => deleteEntry(entry._id)
+    const handleDelete = async () => {
+        // TODO:add loading
+        const isDeleted = await deletePost(entry._id)
+        if (isDeleted) deleteEntry(entry._id)
+    }
 
     return (
         <div
