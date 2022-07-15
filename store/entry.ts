@@ -3,7 +3,8 @@ import { Entry, Status } from '../interfaces'
 import { v4 as uuid } from 'uuid';
 
 interface EntryStoreState {
-  listEntries: Entry[],
+  listEntries: Entry[] | null,
+  setEntries: (entries: Entry[]) => void,
   addEntry: (content: string) => void,
   isDragging: boolean
   setIsDragging: (isDragging: boolean) => void
@@ -12,21 +13,23 @@ interface EntryStoreState {
 }
 
 export const useEntryStore = create<EntryStoreState>((set, get) => ({
-  listEntries: [],
+  listEntries: null,
   isDragging: false,
 
   setIsDragging: (isDragging: boolean) => set(state => ({ ...state, isDragging })),
 
-  deleteEntry: (id: string) => set(state => ({ ...state, listEntries: [...state.listEntries.filter(entry => entry._id !== id)] })),
+  setEntries: (entries: Entry[]) => set(state => ({ ...state, listEntries: [...entries] })),
+
+  deleteEntry: (id: string) => set(state => ({ ...state, listEntries: [...state.listEntries!.filter(entry => entry._id !== id)] })),
 
   updateEntry: (id: string, status: Status) => set(state => {
     const entries = get().listEntries;
-    const newEntryUpdated = entries.filter(entry => entry._id === id)[0];
+    const newEntryUpdated = entries!.filter(entry => entry._id === id)[0];
     if (newEntryUpdated) newEntryUpdated.status = status
 
     return {
       ...state,
-      listEntries: [newEntryUpdated, ...entries.filter(entry => entry._id !== id)]
+      listEntries: [newEntryUpdated, ...entries!.filter(entry => entry._id !== id)]
     }
   }),
 
@@ -40,7 +43,7 @@ export const useEntryStore = create<EntryStoreState>((set, get) => ({
 
     return {
       ...state,
-      listEntries: [newEntry, ...state.listEntries]
+      listEntries: [newEntry, ...state.listEntries!]
     }
   })
 

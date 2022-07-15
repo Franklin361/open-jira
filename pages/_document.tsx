@@ -12,10 +12,7 @@ class MyDocument extends Document {
     render(): JSX.Element {
         return (
             <Html>
-                <Head>
-                    <link rel="shortcut icon" href="https://res.cloudinary.com/dnxchppfm/image/upload/v1646236443/like_cv6hwd.webp" type="image/x-icon" />
-                    <title>Open Jira</title>
-                </Head>
+                <Head />
                 <body>
                     <Main />
                     <NextScript />

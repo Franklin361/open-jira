@@ -1,7 +1,7 @@
 import { useMemo } from "react"
-import { Status } from "../../interfaces"
+import { EntryCard, NoEntries, Loading } from "../"
 import { useEntryStore } from "../../store"
-import { EntryCard } from "./"
+import { Status } from "../../interfaces"
 
 interface Props {
     status: Status
@@ -15,7 +15,7 @@ export const LayoutEntries = ({ status }: Props) => {
     const updateEntry = useEntryStore(state => state.updateEntry)
     const setIsDragging = useEntryStore(state => state.setIsDragging)
 
-    const entries = useMemo(() => listEntries.filter(entry => entry.status === status), [listEntries])
+    const entries = useMemo(() => listEntries ? listEntries.filter(entry => entry.status === status) : [], [listEntries])
 
     const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault()
@@ -27,6 +27,8 @@ export const LayoutEntries = ({ status }: Props) => {
 
     const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => e.preventDefault()
 
+    if (listEntries === null) return <Loading status={status} />
+
     return (
         <div
             onDrop={handleDrop}
@@ -34,15 +36,9 @@ export const LayoutEntries = ({ status }: Props) => {
             className='h-full'
         >
             {
-                entries.length !== 0 ? entries.map(entry => (
-                    <EntryCard key={entry._id} entry={entry} />
-                ))
-                    : <div className={`${status === 'pending' ? 'h-2/4' : 'h-4/6'} flex justify-center items-center`}>
-                        <p className="font-bold text-gray-500 text-2xl fadeInUp">
-                            No entries -
-                            <span className={`${(status == 'pending') ? 'text-secondary' : (status == 'completed') ? 'text-info' : 'text-accent'}`}> {status}</span>
-                        </p>
-                    </div>
+                entries.length !== 0
+                    ? entries.map(entry => (<EntryCard key={entry._id} entry={entry} />))
+                    : <NoEntries status={status} />
             }
         </div>
     )
