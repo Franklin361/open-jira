@@ -1,4 +1,4 @@
-import { entriesApi } from "../apis";
+import entriesApi from "../apis/entriesApi";
 import { Entry } from "../interfaces";
 
 interface Props {

@@ -1,4 +1,4 @@
-import { entriesApi } from "../apis";
+import entriesApi from "../apis/entriesApi";
 
 export const deletePost = async (id: string): Promise<boolean> => {
     try {

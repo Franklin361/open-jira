@@ -1,4 +1,4 @@
-import { entriesApi } from "../apis";
+import entriesApi from "../apis/entriesApi";
 import { Entry } from "../interfaces";
 
 export const refreshEntries = async (callback: (entries: Entry[] | null) => void) => {

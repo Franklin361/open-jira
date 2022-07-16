@@ -1,1 +1,1 @@
-export * from './entriesApi'
+export * as entriesApi from './entriesApi'
