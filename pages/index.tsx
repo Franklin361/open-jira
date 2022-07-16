@@ -10,7 +10,7 @@ const Home: NextPage = () => {
 
   return (
     <MainLayout>
-      <main className="flex gap-5 p-5 h-[85vh]">
+      <main className="grid lg:grid-cols-3 lg:grid-rows-1 md:grid-rows-2 md:grid-cols-2 grid-rows-3 grid-cols-1 gap-5 p-5 lg:h-[85vh] h-auto">
         <ColumnGrid status="pending" children={<Form />} />
         <ColumnGrid status="progress" />
         <ColumnGrid status="completed" />
