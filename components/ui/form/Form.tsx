@@ -1,29 +1,52 @@
-import { useFormEntry } from "../../../hooks"
+import { useEntryStore } from "../../../store"
+import { createPost } from "../../../utils"
 import { ButtonsForm } from "./"
+import { useForm, useShowHideForm } from '../../../hooks';
+
+interface StateForm {
+    content: string
+}
+
 
 export const Form = () => {
+    const addEntry = useEntryStore(state => state.addEntry)
 
-    const { inputRef, showForm, value, loading, ...events } = useFormEntry()
+    const { form: { content }, loading, inputRef, handleResetForm, ...eventsForm } = useForm<StateForm>({
+        initialState: {
+            content: ''
+        },
+        onSubmit: async () => {
+            const entry = await createPost({ content })
+            if (entry) {
+                addEntry(entry)
+                handleResetForm()
+                handleChangeForm(false)
+            }
+        }
+    })
+
+    const [isShowForm, handleChangeForm] = useShowHideForm({ inputRef, handleResetForm })
 
     return (
-        <form className="mt-2" onSubmit={events.handleSubmit}>
+        <form className="mt-2" onSubmit={eventsForm.handleSubmit}>
             {
-                showForm
+                isShowForm
                     ? <>
                         <textarea
                             className="resize-none min-h-[100px] w-full bg-neutral text-neutral-content p-2 font-semibold rounded"
-                            onChange={events.handleChange}
-                            value={value}
+                            onChange={eventsForm.handleChange}
+                            value={content}
                             ref={inputRef}
                             placeholder='To do ...'
                             disabled={loading}
+                            name='content'
                         />
-                        <ButtonsForm handleHideForm={events.handleHideForm} loading={loading} value={value} />
+                        <ButtonsForm handleHideForm={() => handleChangeForm(false)} loading={loading} value={content} />
                     </>
                     : <button
                         type="button"
                         className="btn btn-block btn-secondary btn-sm"
-                        onClick={events.handleShowForm}
+                        onClick={() => handleChangeForm(true)}
                         disabled={loading}
                     > Create entry</button>
             }
