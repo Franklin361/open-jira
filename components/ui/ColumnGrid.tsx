@@ -12,8 +12,8 @@ export const ColumnGrid = ({ status, children }: Props) => {
     const isDragging = useEntryStore(state => state.isDragging)
 
     return (
-        <div className={`transition-all ease-linear flex-1 border p-2 rounded-lg overflow-y-scroll hidden-scroll ${isDragging ? 'bg-black/70' : 'border-neutral-content/50'}`}>
-            <div className="bg-black rounded p-2 text-center sticky top-0">
+        <div className={`transition-all ease-linear flex-1 border p-2 rounded-lg overflow-y-scroll hidden-scroll ${isDragging ? 'bg-black/70' : 'border-neutral-content/50'} max-h-80`}>
+            <div className="bg-black rounded p-2 text-center sticky top-0 z-10">
                 <h4 className="font-bold text-accent capitalize select-none">{status}</h4>
                 {children && children}
             </div>
