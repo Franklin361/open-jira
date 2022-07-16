@@ -1,46 +1,8 @@
-import { ElmentJSX } from "../../interfaces"
-
-interface Props {
-    children: ElmentJSX
-}
-
-export const SideBar = ({ children }: Props) => {
+export const SideBar = ({ title }: { title: string }) => {
     return (
-        <div className="drawer">
-            <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content flex flex-col ">
-
-
-                <div className="w-full navbar bg-neutral mb-5 shadow-2xl shadow-black/70">
-                    <div className="flex-none lg:hidden">
-                        <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                        </label>
-                    </div>
-                    <div className="flex-1 px-2 mx-2">
-                        <span className="font-bold text-xl">Open Jira</span>
-                    </div>
-                    <div className="flex-none hidden lg:block">
-                        <ul className="menu menu-horizontal">
-
-                            <li><a>Navbar Item 1</a></li>
-                            <li><a>Navbar Item 2</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                {children}
-            </div>
-            <div className="drawer-side">
-                <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
-                <ul className="menu p-4 overflow-y-auto w-80 bg-base-100">
-
-                    <li><a>Sidebar Item 1</a></li>
-                    <li><a>Sidebar Item 2</a></li>
-
-                </ul>
-
-            </div>
+        <div className="p-5 bg-neutral flex items-center gap-5">
+            <p className="font-extrabold text-2xl select-none">Open <span className="text-accent-focus">Jira</span></p>
+            <span className="font-light">( {title} )</span>
         </div>
     )
 }
