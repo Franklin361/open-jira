@@ -5,7 +5,7 @@ const mongooseConnection = {
 }
 
 export const connect = async () => {
-    if (mongooseConnection.isConnected === 1) {
+    if (mongooseConnection.isConnected) {
         console.log('Database is [already] connected ✅')
         return;
     }
@@ -32,7 +32,9 @@ export const disconnect = async () => {
     if (process.env.NODE_ENV === 'development') return;
 
     if (mongooseConnection.isConnected === 0) return;
+
     await mongoose.disconnect()
+    mongooseConnection.isConnected = 0;
     console.log('Database is disconnected ✅')
 }
 

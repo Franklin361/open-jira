@@ -38,7 +38,7 @@ export const createEntry = async (req: NextApiRequest, res: NextApiResponse<Data
         await database.connect();
 
         await newEntry.save()
-
+        console.log({ newEntry })
         res.status(200).json(newEntry)
     } catch (error) {
         res.status(500).json({ msg: 'Ups, something is wrong, please trying later! 😞' })
