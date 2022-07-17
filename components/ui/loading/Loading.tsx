@@ -1,4 +1,4 @@
-import { Status } from '../../interfaces'
+import { Status } from '../../../interfaces'
 
 export const Loading = ({ status = 'completed', className = '' }: { status?: Status, className?: string }) => {
     return (

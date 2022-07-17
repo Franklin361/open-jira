@@ -1,7 +1,7 @@
 
 import { useDeleteEntry } from "../../hooks"
 import { Entry } from "../../interfaces"
-import { Loading } from '../ui/Loading';
+import { Loading } from '../ui';
 import { getTimeAgo } from '../../utils/getTimeAgo';
 import { useMemo } from "react";
 

@@ -23,10 +23,11 @@ export const useEntryStore = create<EntryStoreState>((set, get) => ({
   deleteEntry: (id: string) => set(state => ({ ...state, listEntries: [...state.listEntries!.filter(entry => entry._id !== id)] })),
 
   updateEntry: (entryUpdated: Entry) => set(state => {
+    let newListEntries = state.listEntries === null ? [entryUpdated] : [entryUpdated, ...state.listEntries!.filter(entry => entry._id !== entryUpdated._id)]
 
     return {
       ...state,
-      listEntries: [entryUpdated, ...state.listEntries!.filter(entry => entry._id !== entryUpdated._id)]
+      listEntries: newListEntries
     }
   }),
 
