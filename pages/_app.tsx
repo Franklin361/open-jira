@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <meta charSet="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-      <link rel="shortcut icon" href="https://res.cloudinary.com/dnxchppfm/image/upload/v1658068995/open-jira/perspective_matte_flnenk.webp" type="image/x-icon" />
+      <link rel="shortcut icon" href="https://res.cloudinary.com/dnxchppfm/image/upload/c_scale,w_1041/v1658069585/perspective_matte_tpvbhz.webp" type="image/x-icon" />
 
       <meta name="description" content="Open Jira allows you to manage tasks and organize them, by their status, in a simple way in a user-friendly interface. Try it now! 😌" />
       <meta name="author" content="Franklin Martinez" />
