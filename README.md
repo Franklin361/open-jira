@@ -38,7 +38,7 @@
 1. Clone the repository (you need to have [Git](https://git-scm.com) installed).
 
 ```shell
-    git clone []
+    git clone https://github.com/Franklin361/open-jira.git
 ```
 
 2.  Install dependencies of the project.
