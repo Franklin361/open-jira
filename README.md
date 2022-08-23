@@ -6,7 +6,7 @@
 &nbsp;
 
 ## Features ⚙️
----
+
 1. List tasks.
 2. Create tasks.
 3. Delete tasks.
@@ -19,7 +19,7 @@
 &nbsp;
 
 ## Main Technologies 🧪
----
+
 
 - **Next JS**
 - **TypeScript** 
@@ -33,7 +33,7 @@
 
 
 ## **Installation 🧰**
----
+
 
 1. Clone the repository (you need to have [Git](https://git-scm.com) installed).
 
@@ -61,7 +61,7 @@
 &nbsp;
 
 ## **Demo ⛓️**
----
+
 [https://open-jira-fml.vercel.app](https://open-jira-fml.vercel.app/)
 
 
