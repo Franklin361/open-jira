@@ -8,7 +8,7 @@ interface StateForm {
 }
 
 
-export const Form = () => {
+export const Form = ({ existErrorInDb }: { existErrorInDb: boolean }) => {
     const addEntry = useEntryStore(state => state.addEntry)
 
     const { form: { content }, loading, inputRef, handleResetForm, ...eventsForm } = useForm<StateForm>({
@@ -16,6 +16,7 @@ export const Form = () => {
             content: ''
         },
         onSubmit: async () => {
+            if (existErrorInDb) return;
             const entry = await createPost({ content })
             if (entry) {
                 addEntry(entry)

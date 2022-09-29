@@ -1,4 +1,5 @@
 export * from './Sidebar'
+export * from './Alert'
 export * from './ColumnGrid'
 export * from './form'
 export * from './loading'

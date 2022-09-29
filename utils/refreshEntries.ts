@@ -1,12 +1,18 @@
 import entriesApi from "../apis/entriesApi";
 import { Entry } from "../interfaces";
 
-export const refreshEntries = async (callback: (entries: Entry[] | null) => void) => {
+export const refreshEntries = async (): Promise<{ error: boolean, data: Entry[] }> => {
     try {
         const { data } = await entriesApi.get<Entry[]>('/entries');
-        callback(data)
+        return {
+            error: false,
+            data
+        }
     } catch (error) {
         console.log(error)
-        callback(null)
+        return {
+            error: true,
+            data: []
+        }
     }
 }
